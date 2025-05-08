@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fit.tdc.vn.QLKS.Entities.User;
+import fit.tdc.vn.QLKS.Entities.Customer;
 import fit.tdc.vn.QLKS.Entities.Response.UserReponse;
 import fit.tdc.vn.QLKS.Repository.UserRepository;
 import fit.tdc.vn.QLKS.Util.JwtUtil;
@@ -21,21 +21,21 @@ public class UserController {
 	private UserRepository repo;
 	
 	@GetMapping("/user")
-	public List<User> all() {
+	public List<Customer> all() {
 		return repo.findAll();
 	}
 	
 	@PostMapping("/register")
-	public User register(@RequestBody User user) {
-		return repo.save(user);
+	public Customer register(@RequestBody Customer customer) {
+		return repo.save(customer);
 	}
 	
 	@PostMapping("/login")
-    public UserReponse login(@RequestBody User user) {
-		User userDB = repo.findByUsername(user.getUsername());
-        if (userDB.getUsername() != null && user.getPassword().equals(userDB.getPassword())) {
+    public UserReponse login(@RequestBody Customer customer) {
+		Customer customerDB = repo.findByUsername(customer.getUsername());
+        if (customerDB.getUsername() != null && customer.getPassword().equals(customerDB.getPassword())) {
 
-        	String token = JwtUtil.generateToken(userDB.getUsername(), userDB.getId());
+        	String token = JwtUtil.generateToken(customerDB.getUsername(), customerDB.getId());
         	Long userId = JwtUtil.getUserId(token);
         	System.out.println("Userid : " + userId);
         	UserReponse userReponse = new UserReponse(token, userId, "200");
