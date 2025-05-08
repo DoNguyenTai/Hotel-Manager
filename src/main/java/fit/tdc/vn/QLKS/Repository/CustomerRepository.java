@@ -8,7 +8,7 @@ import fit.tdc.vn.QLKS.Entities.Customer;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<Customer, Long>{
+public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
 	Customer findByUsername(String username);
 

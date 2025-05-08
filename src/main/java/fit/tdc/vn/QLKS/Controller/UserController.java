@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fit.tdc.vn.QLKS.Entities.Customer;
 import fit.tdc.vn.QLKS.Entities.Response.UserReponse;
-import fit.tdc.vn.QLKS.Repository.UserRepository;
+import fit.tdc.vn.QLKS.Repository.CustomerRepository;
 import fit.tdc.vn.QLKS.Util.JwtUtil;
 
 @RestController
 @RequestMapping("api")
 public class UserController {
 	@Autowired
-	private UserRepository repo;
+	private CustomerRepository repo;
 	
 	@GetMapping("/user")
 	public List<Customer> all() {

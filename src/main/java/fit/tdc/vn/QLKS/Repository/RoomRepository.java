@@ -1,0 +1,8 @@
+package fit.tdc.vn.QLKS.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import fit.tdc.vn.QLKS.Entities.Room;
+
+public interface RoomRepository extends JpaRepository<Room, Long> {
+}
