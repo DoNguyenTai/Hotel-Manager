@@ -2,16 +2,6 @@ package fit.tdc.vn.QLKS.Entities.DTO;
 
 import java.math.BigDecimal;
 
-import fit.tdc.vn.QLKS.Entities.Hotel;
-import fit.tdc.vn.QLKS.Entities.Location;
-import fit.tdc.vn.QLKS.Entities.RoomType;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
 
 public class RoomDTO {
 

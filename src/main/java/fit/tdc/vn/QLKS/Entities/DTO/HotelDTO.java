@@ -1,12 +1,6 @@
 package fit.tdc.vn.QLKS.Entities.DTO;
 
-import fit.tdc.vn.QLKS.Entities.Location;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 
 public class HotelDTO {
 
