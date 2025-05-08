@@ -28,7 +28,7 @@ import fit.tdc.vn.QLKS.Repository.RoomRepository;
 import jakarta.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("/api/hotels")
+@RequestMapping("/api/room")
 public class RoomController {
 
     @Autowired
