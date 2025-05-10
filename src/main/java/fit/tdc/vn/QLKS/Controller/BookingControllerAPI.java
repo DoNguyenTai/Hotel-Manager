@@ -6,7 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import fit.tdc.vn.QLKS.Entities.Booking;
+import fit.tdc.vn.QLKS.Entities.Customer;
+import fit.tdc.vn.QLKS.Entities.Location;
+import fit.tdc.vn.QLKS.Entities.Room;
+import fit.tdc.vn.QLKS.Entities.DTO.BookingDTO;
+import fit.tdc.vn.QLKS.Enum.StatusBooking;
 import fit.tdc.vn.QLKS.Repository.BookingRepository;
+import fit.tdc.vn.QLKS.Repository.CustomerRepository;
+import fit.tdc.vn.QLKS.Repository.RoomRepository;
 
 import java.util.List;
 
@@ -16,6 +23,12 @@ public class BookingControllerAPI {
 
     @Autowired
     private BookingRepository bookingRepository;
+    
+    @Autowired
+    private RoomRepository roomRepository;
+    
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @GetMapping
     public List<Booking> getAllBookings() {
@@ -30,15 +43,21 @@ public class BookingControllerAPI {
     }
     
     @PostMapping
-    public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+    public ResponseEntity<Booking> createBooking(@RequestBody BookingDTO bookingDTO) {
+    	if(bookingDTO.getCheckInDate().isBefore(bookingDTO.getCheckOutDate()) == false) {
+            return ResponseEntity.badRequest().body(null);
+    	}
         List<Booking> overlappingBookings = bookingRepository.findOverlappingBookings(
-                booking.getRoom().getRoomId(),
-                booking.getCheckInDate(),
-                booking.getCheckOutDate()
+        		bookingDTO.getRoomId(),
+        		bookingDTO.getCheckInDate(),
+        		bookingDTO.getCheckOutDate()
         );
         if (!overlappingBookings.isEmpty()) {
             return ResponseEntity.badRequest().body(null);
         }
+    	Room room = roomRepository.findById(bookingDTO.getRoomId()).orElse(null);
+    	Customer customer = customerRepository.findById(bookingDTO.getCustomerId()).orElse(null);
+        Booking booking = new Booking(customer, room, bookingDTO.getCheckInDate(), bookingDTO.getCheckOutDate(), StatusBooking.DA_DAT);
         return ResponseEntity.ok(bookingRepository.save(booking));
     }
 

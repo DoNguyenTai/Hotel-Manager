@@ -19,7 +19,7 @@ public class Hotel {
     private String name;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "location_id")
     private Location locationId;
 

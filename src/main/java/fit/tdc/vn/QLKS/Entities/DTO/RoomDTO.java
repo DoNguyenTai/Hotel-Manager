@@ -2,12 +2,14 @@ package fit.tdc.vn.QLKS.Entities.DTO;
 
 import java.math.BigDecimal;
 
+import fit.tdc.vn.QLKS.Enum.StatusRoom;
+
 
 public class RoomDTO {
 
 	    private String roomNumber;
 	    private Long roomTypeId;
-	    private String status;
+	    private StatusRoom status;
 	    private BigDecimal price;
 	    private String image;
 	    private int capacity;
@@ -25,10 +27,10 @@ public class RoomDTO {
 		public void setRoomTypeId(Long roomTypeId) {
 			this.roomTypeId = roomTypeId;
 		}
-		public String getStatus() {
+		public StatusRoom getStatus() {
 			return status;
 		}
-		public void setStatus(String status) {
+		public void setStatus(StatusRoom status) {
 			this.status = status;
 		}
 		public BigDecimal getPrice() {

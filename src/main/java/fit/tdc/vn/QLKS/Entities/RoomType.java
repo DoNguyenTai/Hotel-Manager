@@ -12,17 +12,17 @@ public class RoomType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_type_id")
-    private Integer roomTypeId;
+    private Long roomTypeId;
 
     @Column(name = "name")
     private String name;
 
 
-	public Integer getRoomTypeId() {
+	public Long getRoomTypeId() {
 		return roomTypeId;
 	}
 
-	public void setRoomTypeId(Integer roomTypeId) {
+	public void setRoomTypeId(Long roomTypeId) {
 		this.roomTypeId = roomTypeId;
 	}
 

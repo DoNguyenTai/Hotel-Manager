@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+import fit.tdc.vn.QLKS.Enum.StatusRoom;
+
 @Entity
 @Table(name = "rooms")
 @Getter
@@ -24,8 +26,9 @@ public class Room {
     @JoinColumn(name = "room_type_id")
     private RoomType roomTypeId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private StatusRoom status;
 
     @Column(name = "price")
     private BigDecimal price;
@@ -68,11 +71,11 @@ public class Room {
 		this.roomTypeId = roomTypeId;
 	}
 
-	public String getStatus() {
+	public StatusRoom getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusRoom status) {
 		this.status = status;
 	}
 

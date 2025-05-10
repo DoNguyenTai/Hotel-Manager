@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+import fit.tdc.vn.QLKS.Enum.StatusBooking;
+
 @Entity
 @Table(name = "bookings")
 @Getter
@@ -29,9 +31,22 @@ public class Booking {
 
 	@Column(name = "check_out_date")
 	private LocalDate checkOutDate;
-
+	
+    @Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private String status;
+	private StatusBooking status;
+	
+	
+
+	public Booking(Customer customer, Room room, LocalDate checkInDate, LocalDate checkOutDate,
+			StatusBooking status) {
+		super();
+		this.customer = customer;
+		this.room = room;
+		this.checkInDate = checkInDate;
+		this.checkOutDate = checkOutDate;
+		this.status = status;
+	}
 
 	public Integer getBookingId() {
 		return bookingId;
@@ -73,11 +88,11 @@ public class Booking {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public String getStatus() {
+	public StatusBooking getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusBooking status) {
 		this.status = status;
 	}
 
