@@ -1,6 +1,8 @@
 package fit.tdc.vn.QLKS.Entities;
 import org.springframework.data.annotation.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,7 @@ public class Hotel {
 
     @ManyToOne
     @JoinColumn(name = "location_id")
+    @JsonBackReference
     private Location locationId;
 
     @Column(name = "address")

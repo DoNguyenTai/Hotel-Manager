@@ -32,7 +32,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-    public UserReponse login(@RequestBody Customer customer) {
+    public ResponseEntity<UserReponse> login(@RequestBody Customer customer) {
 		Customer customerDB = customerRepository.findByUsername(customer.getUsername());
         if (customerDB.getUsername() != null && customer.getPassword().equals(customerDB.getPassword())) {
 
@@ -41,9 +41,9 @@ public class UserController {
         	System.out.println("Userid : " + userId);
         	UserReponse userReponse = new UserReponse(token, userId, "200");
 
-            return userReponse;
+            return ResponseEntity.ok(userReponse) ;
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 	
 	
