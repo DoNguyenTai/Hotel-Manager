@@ -3,6 +3,7 @@ package fit.tdc.vn.QLKS.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,21 +19,21 @@ import fit.tdc.vn.QLKS.Util.JwtUtil;
 @RequestMapping("api")
 public class UserController {
 	@Autowired
-	private CustomerRepository repo;
+	private CustomerRepository customerRepository;
 	
 	@GetMapping("/user")
 	public List<Customer> all() {
-		return repo.findAll();
+		return customerRepository.findAll();
 	}
 	
 	@PostMapping("/register")
-	public Customer register(@RequestBody Customer customer) {
-		return repo.save(customer);
+	public ResponseEntity<Customer> register(@RequestBody Customer customer) {
+		return ResponseEntity.ok(customerRepository.save(customer)) ;
 	}
 	
 	@PostMapping("/login")
     public UserReponse login(@RequestBody Customer customer) {
-		Customer customerDB = repo.findByUsername(customer.getUsername());
+		Customer customerDB = customerRepository.findByUsername(customer.getUsername());
         if (customerDB.getUsername() != null && customer.getPassword().equals(customerDB.getPassword())) {
 
         	String token = JwtUtil.generateToken(customerDB.getUsername(), customerDB.getId());
