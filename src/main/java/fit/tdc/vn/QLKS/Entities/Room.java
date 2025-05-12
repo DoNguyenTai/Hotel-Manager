@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import fit.tdc.vn.QLKS.Enum.StatusRoom;
 
 @Entity
@@ -41,10 +43,11 @@ public class Room {
     private int capacity;
 
     @Column(name = "description")
-    private int description;
+    private String description;
     
     @ManyToOne
     @JoinColumn(name = "hotel_id")
+    @JsonBackReference
     private Hotel hotel;
 
 	public Long getRoomId() {
@@ -103,11 +106,11 @@ public class Room {
 		this.capacity = capacity;
 	}
 
-	public int getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(int description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

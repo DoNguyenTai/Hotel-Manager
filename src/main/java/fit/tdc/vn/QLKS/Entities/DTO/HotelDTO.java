@@ -3,7 +3,7 @@ package fit.tdc.vn.QLKS.Entities.DTO;
 
 
 public class HotelDTO {
-
+		private Long hotelId;
 	    private String name;
 	    private Long locationId;
 	    private String address;
@@ -55,6 +55,13 @@ public class HotelDTO {
 		public void setImage(String image) {
 			this.image = image;
 		}
+		public Long getHotelId() {
+			return hotelId;
+		}
+		public void setHotelId(Long hotelId) {
+			this.hotelId = hotelId;
+		}
+		
 		
 		
 	    

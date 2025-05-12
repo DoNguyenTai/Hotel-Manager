@@ -1,7 +1,11 @@
 package fit.tdc.vn.QLKS.Entities;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -41,6 +45,10 @@ public class Hotel {
     
     @Column(name = "status")
     private String status;
+    
+    @OneToMany(mappedBy = "roomId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Room> rooms = new ArrayList<>();
 
 
 	public String getName() {

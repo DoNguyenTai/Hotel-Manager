@@ -13,7 +13,7 @@ public class RoomDTO {
 	    private BigDecimal price;
 	    private String image;
 	    private int capacity;
-	    private int description;
+	    private String description;
 	    private Long hotelId;
 		public String getRoomNumber() {
 			return roomNumber;
@@ -51,10 +51,10 @@ public class RoomDTO {
 		public void setCapacity(int capacity) {
 			this.capacity = capacity;
 		}
-		public int getDescription() {
+		public String getDescription() {
 			return description;
 		}
-		public void setDescription(int description) {
+		public void setDescription(String description) {
 			this.description = description;
 		}
 		public Long getHotelId() {
