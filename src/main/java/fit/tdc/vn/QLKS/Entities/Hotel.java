@@ -32,6 +32,10 @@ public class Hotel {
     @Column(name = "phone")
     private String phone;
     
+    @Lob
+    @Column(name = "image")
+    private String image;
+    
     @Column(name = "email")
     private String email;
     
@@ -94,6 +98,14 @@ public class Hotel {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Override

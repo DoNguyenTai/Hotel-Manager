@@ -7,6 +7,7 @@ public class HotelDTO {
 	    private String name;
 	    private Long locationId;
 	    private String address;
+	    private String image;
 	    private String phone;
 	    private String email;
 	    private String status;
@@ -48,6 +49,13 @@ public class HotelDTO {
 		public void setStatus(String status) {
 			this.status = status;
 		}
+		public String getImage() {
+			return image;
+		}
+		public void setImage(String image) {
+			this.image = image;
+		}
+		
 		
 	    
 	    

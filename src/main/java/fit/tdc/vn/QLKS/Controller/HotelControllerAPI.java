@@ -74,6 +74,7 @@ public class HotelControllerAPI {
                     hotel.setLocationId(location);
                     hotel.setAddress(hotelDTO.getAddress());
                     hotel.setPhone(hotelDTO.getPhone());
+                    hotel.setPhone(hotelDTO.getImage());
                     hotel.setEmail(hotelDTO.getEmail());
                     return ResponseEntity.ok(hotelRepository.save(hotel));
                 })
