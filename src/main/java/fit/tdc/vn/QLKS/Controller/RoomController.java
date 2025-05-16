@@ -59,6 +59,11 @@ public class RoomController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
+    @GetMapping("/by-location/{hotelID}")
+    public List<Room> getHotelsByLocation(@PathVariable Long hotelID) {
+        return roomRepository.findByHotel_HotelId(hotelID);
+    }
+    
     @PostMapping
     public ResponseEntity<Room> store(@RequestBody RoomDTO roomDTO) {
 

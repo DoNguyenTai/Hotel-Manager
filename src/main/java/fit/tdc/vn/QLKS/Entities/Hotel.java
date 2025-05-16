@@ -48,7 +48,7 @@ public class Hotel {
     private String status;
     
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Room> rooms = new ArrayList<>();
 
 

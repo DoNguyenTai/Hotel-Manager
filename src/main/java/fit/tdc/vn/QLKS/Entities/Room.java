@@ -48,7 +48,7 @@ public class Room {
     
     @ManyToOne()
     @JoinColumn(name = "hotel_id")
-    @JsonBackReference
+    @JsonIgnore
     private Hotel hotel;
 
 	public Long getRoomId() {

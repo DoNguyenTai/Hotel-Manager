@@ -36,7 +36,7 @@ public class LocationCotrollerAPI {
     }
 	
 	@GetMapping("/hotel/{locationId}")
-	public ResponseEntity<LocationResponse> getLocationWithHotels(@PathVariable Long locationId) {
+	public ResponseEntity<?> getLocationWithHotels(@PathVariable Long locationId) {
 		System.out.println(locationId);
         Location location = locationRepository.findById(locationId)
                 .orElseThrow(() -> new RuntimeException("Location not found"));
