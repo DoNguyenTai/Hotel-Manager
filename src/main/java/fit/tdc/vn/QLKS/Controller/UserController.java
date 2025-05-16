@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fit.tdc.vn.QLKS.Entities.Customer;
+import fit.tdc.vn.QLKS.Entities.Room;
 import fit.tdc.vn.QLKS.Entities.Response.UserReponse;
 import fit.tdc.vn.QLKS.Repository.CustomerRepository;
 import fit.tdc.vn.QLKS.Util.JwtUtil;
@@ -25,6 +27,13 @@ public class UserController {
 	public List<Customer> all() {
 		return customerRepository.findAll();
 	}
+	
+	@GetMapping("/user/{id}")
+    public ResponseEntity<Customer> find(@PathVariable Long id) {
+        return customerRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 	
 	@PostMapping("/register")
 	public ResponseEntity<Customer> register(@RequestBody Customer customer) {
