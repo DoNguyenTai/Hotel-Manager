@@ -35,14 +35,9 @@ public class LocationCotrollerAPI {
         return ResponseEntity.ok(locationRepository.findAll());
     }
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Location> getLocationByID(@PathVariable Long id){
-		return locationRepository.findById(id).map(ResponseEntity::ok)
-				.orElseGet(()-> ResponseEntity.notFound().build());
-		
-	}
-	@GetMapping("/hotel/{id}")
-	public LocationResponse getLocationWithHotels(Long locationId) {
+	@GetMapping("/hotel/{locationId}")
+	public ResponseEntity<LocationResponse> getLocationWithHotels(@PathVariable Long locationId) {
+		System.out.println(locationId);
         Location location = locationRepository.findById(locationId)
                 .orElseThrow(() -> new RuntimeException("Location not found"));
 
@@ -65,8 +60,16 @@ public class LocationCotrollerAPI {
         }).toList();
 
         locationResponse.setHotels(hotelResponses);
-        return locationResponse;
+        return ResponseEntity.ok(locationResponse);
     }
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Location> getLocationByID(@PathVariable Long id){
+		return locationRepository.findById(id).map(ResponseEntity::ok)
+				.orElseGet(()-> ResponseEntity.notFound().build());
+		
+	}
+	
 	
 	@PostMapping
 	public Location store(@RequestBody Location location) {

@@ -46,10 +46,7 @@ public class HotelControllerAPI {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
-    @GetMapping("/by-location/{locationId}")
-    public List<Hotel> getHotelsByLocation(Long locationId) {
-        return hotelRepository.findByLocationId_LocationId(locationId);
-    }
+
 
     @PostMapping
     public ResponseEntity<Hotel> createHotel(@RequestBody HotelDTO hotelDTO) {
