@@ -17,6 +17,8 @@ import fit.tdc.vn.QLKS.Entities.Customer;
 import fit.tdc.vn.QLKS.Entities.Location;
 import fit.tdc.vn.QLKS.Entities.DTO.HotelDTO;
 import fit.tdc.vn.QLKS.Entities.DTO.LocationDTO;
+import fit.tdc.vn.QLKS.Entities.Response.HotelResponse;
+import fit.tdc.vn.QLKS.Entities.Response.LocationResponse;
 import fit.tdc.vn.QLKS.Repository.LocationRepository;
 
 
@@ -29,31 +31,8 @@ public class LocationCotrollerAPI {
 	private LocationRepository locationRepository;
 	
 	@GetMapping
-	public List<LocationDTO> getAllLocationsWithHotels() {
-        List<Location> locations = locationRepository.findAll();
-
-        return locations.stream().map(location -> {
-            LocationDTO dto = new LocationDTO();
-            dto.setLocationId(location.getLocationId());
-            dto.setName(location.getName());
-            dto.setDescription(location.getDescription());
-            dto.setImage(location.getImage());
-
-            List<HotelDTO> hotelDTOs = location.getHotels().stream().map(hotel -> {
-            	HotelDTO h = new HotelDTO();
-                h.setHotelId(hotel.getHotelId());
-                h.setName(hotel.getName());
-                h.setAddress(hotel.getAddress());
-                h.setPhone(hotel.getPhone());
-                h.setImage(hotel.getImage());
-                h.setEmail(hotel.getEmail());
-                h.setStatus(hotel.getStatus());
-                return h;
-            }).collect(Collectors.toList());
-
-            dto.setHotels(hotelDTOs);
-            return dto;
-        }).collect(Collectors.toList());
+	public ResponseEntity<?> getAllLocationsWithHotels() {
+        return ResponseEntity.ok(locationRepository.findAll());
     }
 	
 	@GetMapping("/{id}")
@@ -61,8 +40,33 @@ public class LocationCotrollerAPI {
 		return locationRepository.findById(id).map(ResponseEntity::ok)
 				.orElseGet(()-> ResponseEntity.notFound().build());
 		
-		
 	}
+	@GetMapping("/hotel/{id}")
+	public LocationResponse getLocationWithHotels(Long locationId) {
+        Location location = locationRepository.findById(locationId)
+                .orElseThrow(() -> new RuntimeException("Location not found"));
+
+        LocationResponse locationResponse = new LocationResponse();
+        locationResponse.setLocationId(location.getLocationId());
+        locationResponse.setName(location.getName());
+        locationResponse.setDescription(location.getDescription());
+        locationResponse.setImage(location.getImage());
+
+        List<HotelResponse> hotelResponses = location.getHotels().stream().map(h -> {
+        	HotelResponse hotelResponse = new HotelResponse();
+        	hotelResponse.setHotelID(h.getHotelId());
+        	hotelResponse.setName(h.getName());
+        	hotelResponse.setAddress(h.getAddress());
+            hotelResponse.setPhone(h.getPhone());
+            hotelResponse.setEmail(h.getEmail());
+            hotelResponse.setStatus(h.getStatus());
+            hotelResponse.setImage(h.getImage());
+            return hotelResponse;
+        }).toList();
+
+        locationResponse.setHotels(hotelResponses);
+        return locationResponse;
+    }
 	
 	@PostMapping
 	public Location store(@RequestBody Location location) {

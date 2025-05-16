@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import fit.tdc.vn.QLKS.Entities.DTO.RoomDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,6 @@ public class Hotel {
 
     @ManyToOne
     @JoinColumn(name = "location_id")
-    @JsonBackReference
     private Location locationId;
 
     @Column(name = "address")
@@ -36,7 +37,7 @@ public class Hotel {
     @Column(name = "phone")
     private String phone;
     
-    @Lob
+
     @Column(name = "image")
     private String image;
     
@@ -46,7 +47,7 @@ public class Hotel {
     @Column(name = "status")
     private String status;
     
-    @OneToMany(mappedBy = "roomId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
     private List<Room> rooms = new ArrayList<>();
 

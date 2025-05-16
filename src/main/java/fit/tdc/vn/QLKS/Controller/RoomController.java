@@ -49,6 +49,8 @@ public class RoomController {
     public List<Room> all() {
         return roomRepository.findAll();
     }
+    
+ 
 
     @GetMapping("/{id}")
     public ResponseEntity<Room> find(@PathVariable Long id) {
@@ -62,7 +64,6 @@ public class RoomController {
 
     	Hotel hotel = hotelRepository.findById(roomDTO.getHotelId()).orElse(null);
     	RoomType roomType = roomTypeRepository.findById(roomDTO.getRoomTypeId()).orElse(null);
-    	
     	
     	if(hotel != null && roomType != null) {
     		Room room = new Room();

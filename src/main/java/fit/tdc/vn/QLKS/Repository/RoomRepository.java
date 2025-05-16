@@ -10,4 +10,5 @@ import fit.tdc.vn.QLKS.Enum.StatusRoom;
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
 	List<Room> findByStatus(StatusRoom statusRoom);
+
 }

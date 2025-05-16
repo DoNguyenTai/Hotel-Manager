@@ -2,6 +2,7 @@ package fit.tdc.vn.QLKS.Entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -29,7 +30,7 @@ public class Location {
     private String image;
     
     @OneToMany(mappedBy = "locationId", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Hotel> hotels = new ArrayList<>();
 
 	public Long getLocationId() {

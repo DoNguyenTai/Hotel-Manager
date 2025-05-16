@@ -8,6 +8,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import fit.tdc.vn.QLKS.Enum.StatusRoom;
 
@@ -35,7 +37,6 @@ public class Room {
     @Column(name = "price")
     private BigDecimal price;
     
-    @Lob
     @Column(name = "image")
     private String image;
     
@@ -45,7 +46,7 @@ public class Room {
     @Column(name = "description")
     private String description;
     
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "hotel_id")
     @JsonBackReference
     private Hotel hotel;
