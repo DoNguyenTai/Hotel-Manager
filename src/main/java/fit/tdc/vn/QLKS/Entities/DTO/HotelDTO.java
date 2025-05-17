@@ -25,7 +25,7 @@ public class HotelDTO {
 	    public HotelDTO (Hotel hotel) {
 			this.id = hotel.getHotelId();
 			this.address = hotel.getAddress();
-			this.rooms = hotel.getRooms();
+//			this.rooms = hotel.getRooms();
 			this.location = hotel.getLocationId();
 			this.name = hotel.getName();
 			this.status = hotel.getStatus();
