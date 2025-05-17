@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import fit.tdc.vn.QLKS.Enum.StatusBooking;
@@ -32,11 +33,16 @@ public class Booking {
 	@Column(name = "check_out_date")
 	private LocalDate checkOutDate;
 	
+//	@Column(name = "price")
+//	private BigDecimal price;
+	
     @Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private StatusBooking status;
 	
-	
+	public Booking() {
+		
+	}	
 
 	public Booking(Customer customer, Room room, LocalDate checkInDate, LocalDate checkOutDate,
 			StatusBooking status) {

@@ -3,6 +3,7 @@ package fit.tdc.vn.QLKS.Controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,13 +36,15 @@ public class HotelControllerAPI {
     private LocationRepository locationRepository;
 
     @GetMapping
-    public List<Hotel> getAllHotels() {
-        return hotelRepository.findAll();
+    public List<HotelDTO> getAllHotels() {
+        return hotelRepository.findAll().stream()
+        		.map(HotelDTO::new).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Hotel> getHotelById(@PathVariable Long id) {
+    public ResponseEntity<HotelDTO> getHotelById(@PathVariable Long id) {
         return hotelRepository.findById(id)
+                .map(HotelDTO::new)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
