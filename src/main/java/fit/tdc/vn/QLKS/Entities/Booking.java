@@ -35,6 +35,7 @@ public class Booking {
 	
 //	@Column(name = "price")
 //	private BigDecimal price;
+
 	
     @Enumerated(EnumType.STRING)
 	@Column(name = "status")
